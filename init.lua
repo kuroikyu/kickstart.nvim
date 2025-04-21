@@ -630,6 +630,12 @@ require('lazy').setup({
         end
         -- vim.diagnostic.config { signs = { text = diagnostic_signs }, virtual_lines = { current_line = true } }
         vim.diagnostic.config { signs = { text = diagnostic_signs }, virtual_text = true }
+        vim.keymap.set('', '<leader>td', function()
+          vim.diagnostic.config {
+            virtual_lines = not vim.diagnostic.config().virtual_lines and { current_line = true } or false,
+            virtual_text = not vim.diagnostic.config().virtual_text,
+          }
+        end, { desc = '[T]oggle [D]iagnostic' })
       end
 
       -- LSP servers and clients are able to communicate to each other what features they support.
