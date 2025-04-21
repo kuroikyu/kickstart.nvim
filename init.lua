@@ -625,7 +625,8 @@ require('lazy').setup({
         for type, icon in pairs(signs) do
           diagnostic_signs[vim.diagnostic.severity[type]] = icon
         end
-        vim.diagnostic.config { signs = { text = diagnostic_signs }, virtual_lines = { current_line = true } }
+        -- vim.diagnostic.config { signs = { text = diagnostic_signs }, virtual_lines = { current_line = true } }
+        vim.diagnostic.config { signs = { text = diagnostic_signs }, virtual_text = true }
       end
 
       -- LSP servers and clients are able to communicate to each other what features they support.
