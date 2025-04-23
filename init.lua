@@ -161,9 +161,6 @@ vim.opt.scrolloff = 10
 -- See `:help 'confirm'`
 vim.opt.confirm = true
 
--- Add a rounded border to floating windows
-vim.o.winborder = 'rounded'
-
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
@@ -529,6 +526,11 @@ require('lazy').setup({
             mode = mode or 'n'
             vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
           end
+
+          -- Add a border to the LSP hover functionality
+          map('K', function()
+            vim.lsp.buf.hover { border = 'rounded' }
+          end, 'Hover with rounded borders')
 
           -- Rename the variable under your cursor.
           --  Most Language Servers support renaming across files, etc.
