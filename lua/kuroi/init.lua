@@ -22,6 +22,13 @@ wk.add {
   { mode = 'v', 'J', ":m '>+1<CR>gv=gv", desc = 'Move line down', icon = '󰶡' },
   { mode = 'v', 'K', ":m '<-2<CR>gv=gv", desc = 'Move line up', icon = '󰶣' },
 
+  -- Search TODOs
+  {
+    '<leader>st',
+    '<CMD>TodoTelescope<CR>',
+    desc = '[S]earch [T]ODO',
+  },
+
   -- Persistance.nvim
   {
     '<leader>pps',
