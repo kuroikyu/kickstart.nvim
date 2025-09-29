@@ -4,6 +4,7 @@ local builtin = require 'telescope.builtin'
 wk.add {
   -- Groups
   { '<leader>p', group = '[P]roject', icon = '󰉋' },
+  { '<leader>pp', group = '[P]roject [P]ersistance', icon = '󰉋' },
 
   -- Search files applying .gitignore
   { '<leader>pf', builtin.git_files, desc = '[P]roject Git [F]iles' },
@@ -20,6 +21,39 @@ wk.add {
   -- Move visually lines selected up or down
   { mode = 'v', 'J', ":m '>+1<CR>gv=gv", desc = 'Move line down', icon = '󰶡' },
   { mode = 'v', 'K', ":m '<-2<CR>gv=gv", desc = 'Move line up', icon = '󰶣' },
+
+  -- Persistance.nvim
+  {
+    '<leader>pps',
+    function()
+      require('persistence').load()
+    end,
+    desc = '[P]roject Load [S]ession for current directory',
+  },
+
+  {
+    '<leader>ppS',
+    function()
+      require('persistence').select()
+    end,
+    desc = '[P]roject [S]elect Session to Load',
+  },
+
+  {
+    '<leader>ppl',
+    function()
+      require('persistence').load { last = true }
+    end,
+    desc = '[P]roject [S]elect Load [L]ast Session',
+  },
+
+  {
+    '<leader>ppq',
+    function()
+      require('persistence').stop()
+    end,
+    desc = "[P]roject [Q]uit Persistence. Won't save session on exit",
+  },
 }
 
 -- Set indentation
