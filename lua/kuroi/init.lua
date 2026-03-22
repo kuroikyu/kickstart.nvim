@@ -27,6 +27,7 @@ wk.add {
     '<leader>st',
     '<CMD>TodoTelescope<CR>',
     desc = '[S]earch [T]ODO',
+    icon = ' ',
   },
 
   -- Persistance.nvim
