@@ -638,6 +638,21 @@ require('lazy').setup({
         end,
       })
 
+      vim.api.nvim_create_autocmd('LspAttach', {
+        group = vim.api.nvim_create_augroup('lsp_attach_disable_ruff_hover', { clear = true }),
+        callback = function(args)
+          local client = vim.lsp.get_client_by_id(args.data.client_id)
+          if client == nil then
+            return
+          end
+          if client.name == 'ruff' then
+            -- Disable hover in favor of Pyright
+            client.server_capabilities.hoverProvider = false
+          end
+        end,
+        desc = 'LSP: Disable hover capability from Ruff',
+      })
+
       -- Change diagnostic symbols in the sign column (gutter)
       if vim.g.have_nerd_font then
         local signs = { ERROR = '', WARN = '', INFO = '', HINT = '' }
@@ -673,7 +688,26 @@ require('lazy').setup({
       local servers = {
         -- clangd = {},
         -- gopls = {},
-        -- pyright = {},
+        pyright = {
+          pyright = {
+            -- Using Ruff's import organizer
+            disableOrganizeImports = true,
+          },
+          python = {
+            analysis = {
+              -- Ignore all files for analysis to exclusively use Ruff for linting
+              ignore = { '*' },
+            },
+          },
+        },
+        ruff = {
+          -- init_options = {
+          --   settings = {
+          --     configuration_preference = 'filesystemFirst',
+          --     lineLength = 120,
+          --   },
+          -- },
+        },
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
@@ -770,6 +804,7 @@ require('lazy').setup({
         lua = { 'stylua' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
+        python = { 'ruff_format', 'ruff_organize_imports' },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
         javascript = { 'prettierd', 'prettier', stop_after_first = true },
