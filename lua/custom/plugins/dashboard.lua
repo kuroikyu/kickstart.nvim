@@ -14,8 +14,8 @@ return {
       dashboard.button('e', '  New File', '<CMD>ene<BAR>startinsert<CR>'),
 
       dashboard.button('<leader>pv', '  Project View', '<CMD>Oil --float --preview<CR>'),
-      dashboard.button('<leader>sg', '  Search by Grep', '<cmd>Telescope live_grep<CR>'),
-      dashboard.button('<leader>sf', '󰱼  Search Files', '<cmd>Telescope find_files<CR>'),
+      dashboard.button('<leader>sg', '  Search by Grep', '<cmd>lua Snacks.picker.grep()<CR>'),
+      dashboard.button('<leader>sf', '󰱼  Search Files', '<cmd>lua Snacks.picker.files()<CR>'),
 
       dashboard.button('l', '󰒲  Lazy', '<CMD>Lazy<CR>'),
       dashboard.button('m', '  Mason', '<CMD>Mason<CR>'),

@@ -1,5 +1,4 @@
 local wk = require 'which-key'
-local builtin = require 'telescope.builtin'
 
 wk.add {
   -- Groups
@@ -7,7 +6,7 @@ wk.add {
   { '<leader>pp', group = '[P]roject [P]ersistance', icon = '󰉋' },
 
   -- Search files applying .gitignore
-  { '<leader>pf', builtin.git_files, desc = '[P]roject Git [F]iles' },
+  { '<leader>pf', function() Snacks.picker.git_files() end, desc = '[P]roject Git [F]iles' },
 
   -- Open project view
   -- { '<leader>pv', vim.cmd.Ex, desc = '[P]roject [V]iew' },
@@ -25,7 +24,7 @@ wk.add {
   -- Search TODOs
   {
     '<leader>st',
-    '<CMD>TodoTelescope<CR>',
+    function() Snacks.picker.todo_comments() end,
     desc = '[S]earch [T]ODO',
     icon = ' ',
   },
