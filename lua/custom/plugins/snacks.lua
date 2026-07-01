@@ -2,6 +2,7 @@ return {
   'folke/snacks.nvim',
   priority = 1000,
   lazy = false,
+  ---@type snacks.Config
   opts = {
     picker = {},
   },
@@ -21,7 +22,7 @@ return {
       { '<leader>sr', function() Snacks.picker.resume() end, desc = '[S]earch [R]esume' },
       { '<leader>s.', function() Snacks.picker.recent() end, desc = '[S]earch Recent Files ("." for repeat)' },
       { '<leader>sc', function() Snacks.picker.commands() end, desc = '[S]earch [C]ommands' },
-      { '<leader><leader>', function() Snacks.picker.buffers() end, desc = '[ ] Find existing buffers' },
+      { '<leader><leader>', function() Snacks.picker.buffers { sort_lastused = true } end, desc = '[ ] Find existing buffers' },
       { '<leader>sm', function() Snacks.picker.git_status() end, desc = '[S]earch Git [M]odified files (git status)' },
       { '<leader>sn', function() Snacks.picker.files { cwd = vim.fn.stdpath 'config' } end, desc = '[S]earch [N]eovim files' },
       { '<leader>s/', function() Snacks.picker.grep_buffers() end, desc = '[S]earch [/] in Open Files' },
