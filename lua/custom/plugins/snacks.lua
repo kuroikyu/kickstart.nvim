@@ -5,6 +5,7 @@ return {
   ---@type snacks.Config
   opts = {
     picker = {},
+    image = {},
   },
   config = function(_, opts)
     require('snacks').setup(opts)
