@@ -90,3 +90,5 @@ vim.opt.tabstop = 2
 --     end
 --   end,
 -- })
+
+require 'custom.search-count'
