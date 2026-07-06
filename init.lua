@@ -187,7 +187,19 @@ vim.diagnostic.config {
   jump = { float = true },
 }
 
+local function toggle_diagnostics_display()
+  local current = vim.diagnostic.config()
+  if current.virtual_lines then
+    vim.diagnostic.config { virtual_text = true, virtual_lines = false }
+    vim.notify 'Diagnostics: virtual text'
+  else
+    vim.diagnostic.config { virtual_text = false, virtual_lines = { current_line = true } }
+    vim.notify 'Diagnostics: virtual lines'
+  end
+end
+
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+vim.keymap.set('n', '<leader>td', toggle_diagnostics_display, { desc = '[T]oggle [d]iagnostics display (virtual text/lines)' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
